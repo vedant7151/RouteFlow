@@ -1,0 +1,9 @@
+target/
+uploads/
+output/
+*.log
+.env
+.idea/
+*.iml
+.vscode/
+node_modules/

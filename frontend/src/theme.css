@@ -1,0 +1,73 @@
+/*
+ * Design tokens - the ONE file to touch to restyle RouteFlow.
+ * Nothing in index.css or any component should hardcode a color, spacing value, radius,
+ * shadow or font - they all read from these custom properties. Change a value here and it
+ * propagates everywhere the token is used, with no component/logic changes required.
+ *
+ * To add a dark theme (or any alternate skin) without touching components: duplicate the
+ * :root block below under `[data-theme="dark"] { ... }` with new values, then set
+ * document.documentElement.dataset.theme = "dark" wherever you want it applied.
+ */
+:root {
+  /* Surfaces */
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-alt: #f3f4f6;
+  --border: #e5e7eb;
+
+  /* Text */
+  --text: #1f2937;
+  --text-muted: #6b7280;
+
+  /* Brand / status colors */
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-bg: #eef2ff;
+  --danger: #dc2626;
+  --danger-bg: #fee2e2;
+  --success: #16a34a;
+  --success-bg: #dcfce7;
+  --warning: #d97706;
+  --warning-bg: #fef3c7;
+  --info: #0369a1;
+  --info-bg: #e0f2fe;
+
+  /* Chart palette (referenced directly by SVG fill="var(--chart-1)" etc.) */
+  --chart-1: #2563eb;
+  --chart-2: #16a34a;
+  --chart-3: #d97706;
+  --chart-4: #dc2626;
+  --chart-5: #7c3aed;
+  --chart-6: #0891b2;
+
+  /* Map markers */
+  --marker-pending: #9ca3af;
+  --marker-active: #2563eb;
+  --marker-delivered: #16a34a;
+  --marker-failed: #dc2626;
+  --marker-vehicle: #7c3aed;
+  --marker-depot: #0f172a;
+  --marker-picked: #ea580c;
+
+  /* Shape / spacing / elevation */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.12);
+
+  /* Type */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-size-base: 14px;
+
+  /* Layout */
+  --content-max-width: 1100px;
+  --content-max-width-wide: 1400px;
+
+  color-scheme: light;
+}

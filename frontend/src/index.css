@@ -1,0 +1,813 @@
+/* Design tokens live in theme.css (imported before this file) - see that file to restyle. */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+}
+
+/* --- Layout --- */
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 16px;
+  margin-right: 24px;
+  color: var(--text);
+}
+
+.navbar-link {
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.navbar-link:hover {
+  color: var(--text);
+}
+
+.navbar-link.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.page {
+  flex: 1;
+  padding: var(--space-6) 32px;
+  max-width: var(--content-max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-wide {
+  max-width: var(--content-max-width-wide);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-header h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.page-header p {
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+/* --- Cards / surfaces --- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card + .card {
+  margin-top: 16px;
+}
+
+.card h2 {
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.kpi-card .kpi-label {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.kpi-card .kpi-value {
+  font-size: 20px;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+/* --- Buttons --- */
+.btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: var(--surface-alt);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-strong);
+}
+
+.btn-danger {
+  color: var(--danger);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* --- Forms --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.form-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+/* --- Table --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+tbody tr:hover {
+  background: var(--surface-alt);
+}
+
+/* --- Badges --- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+
+.badge-blue { background: var(--accent-bg); color: var(--accent); }
+.badge-green { background: var(--success-bg); color: var(--success); }
+.badge-red { background: var(--danger-bg); color: var(--danger); }
+.badge-amber { background: var(--warning-bg); color: var(--warning); }
+
+.empty-state {
+  color: var(--text-muted);
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.banner-error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bg);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: var(--space-4);
+  font-size: 13px;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+}
+
+.section-title:first-child {
+  margin-top: 0;
+}
+
+/* --- Login screen --- */
+.login-screen {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 340px;
+}
+
+.login-brand {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.navbar-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+/* --- Live map layout --- */
+.map-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: var(--space-4);
+  align-items: start;
+  height: calc(100vh - 56px - var(--space-6) * 2 - 48px);
+  min-height: 480px;
+}
+
+.map-sidebar {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.map-canvas-card {
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+}
+
+.route-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.route-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+}
+
+.route-card-header:hover {
+  background: var(--surface-alt);
+}
+
+.route-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.route-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.route-card-meta {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.stop-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--space-4) var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+.stop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 12.5px;
+}
+
+.stop-row:last-child {
+  border-bottom: none;
+}
+
+.stop-row-main {
+  min-width: 0;
+}
+
+.stop-row-address {
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 190px;
+}
+
+.stop-row-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* Leaflet marker icons built from plain CSS instead of image assets, so their color
+   follows the --marker-* tokens above with zero bundler asset-path fuss. */
+.map-marker {
+  /* markers are <span>s: without display:block their width/height are ignored and they collapse to white slivers */
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.map-marker-pending { background: var(--marker-pending); }
+.map-marker-active { background: var(--marker-active); }
+.map-marker-delivered { background: var(--marker-delivered); }
+.map-marker-failed { background: var(--marker-failed); }
+
+.map-marker-vehicle {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--marker-vehicle);
+  border: 3px solid #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.map-popup {
+  font-size: 13px;
+  min-width: 180px;
+}
+
+.map-popup-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.map-popup-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* --- Modal / overlay --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  /* Leaflet's own panes/controls use z-index up to 1000 - this must clear that. */
+  z-index: 2000;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-5);
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+  padding: 4px;
+}
+
+.modal-close:hover {
+  color: var(--text);
+}
+
+/* --- Signature pad --- */
+.signature-pad {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  touch-action: none;
+  cursor: crosshair;
+  width: 100%;
+  height: 140px;
+}
+
+.signature-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+.pod-photo-preview {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-top: var(--space-2);
+}
+
+/* --- Tabs (used on Analytics for date-range presets) --- */
+.tabs {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--surface-alt);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.tab.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Charts --- */
+.chart-card {
+  height: 280px;
+}
+
+.chart-card h2 {
+  margin-bottom: var(--space-2);
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--space-4);
+}
+
+/* the global ".card + .card" spacing must not push the 2nd chart in a grid row down */
+.chart-grid > .card + .card { margin-top: 0; }
+.chart-grid { margin-bottom: var(--space-4); }
+
+.leaderboard-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.leaderboard-row:last-child {
+  border-bottom: none;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--success);
+  margin-right: 6px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+
+/* ===================================================================================
+   Additions: orders map, banners, chips, driver view, misc. (all colours from theme.css)
+   =================================================================================== */
+
+.field-wide { grid-column: 1 / -1; }
+.nowrap { white-space: nowrap; }
+.table-scroll { overflow-x: auto; }
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+a.btn { display: inline-block; text-align: center; }
+
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+}
+.link-btn:disabled { color: var(--text-muted); cursor: not-allowed; text-decoration: none; }
+
+.select-sm {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: var(--surface);
+  color: var(--text);
+  max-width: 110px;
+}
+
+/* --- Banners --- */
+.banner-success, .banner-warning, .banner-info {
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: var(--space-4);
+  font-size: 13px;
+}
+.banner-success { background: var(--success-bg); color: var(--success); }
+.banner-warning { background: var(--warning-bg); color: var(--warning); }
+.banner-info { background: var(--info-bg); color: var(--info); margin-top: var(--space-2); }
+.banner-list { margin: 6px 0 0; padding-left: 18px; }
+
+/* --- Chips / filters --- */
+.filters { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.chip {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.chip:hover { background: var(--surface-alt); }
+.chip.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+
+/* --- Orders map (sits beside the form while creating/editing, so a pin can be dropped without scrolling) --- */
+.orders-top { margin-bottom: var(--space-2); }
+.orders-top.with-form {
+  display: grid;
+  grid-template-columns: minmax(340px, 1fr) minmax(340px, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+.orders-top.with-form .map-card { position: sticky; top: var(--space-4); height: 520px; }
+.orders-top .card + .card { margin-top: 0; }
+.map-card { padding: 0; height: 340px; overflow: hidden; }
+.map-card .map-canvas { height: 100%; }
+.map-picking, .map-picking .leaflet-grab { cursor: crosshair !important; }
+
+.legend {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 999px; margin-right: 5px; vertical-align: middle; }
+.legend-pending { background: var(--marker-pending); }
+.legend-active { background: var(--marker-active); }
+.legend-delivered { background: var(--marker-delivered); }
+.legend-failed { background: var(--marker-failed); }
+.legend-depot { background: var(--marker-depot); border-radius: 2px; }
+
+.map-marker-depot { border-radius: 3px; background: var(--marker-depot); width: 16px; height: 16px; }
+.map-marker-picked {
+  width: 20px; height: 20px; border-radius: 999px;
+  background: var(--marker-picked); border: 3px solid #fff; box-shadow: var(--shadow-md);
+}
+
+/* --- Live map extras --- */
+.route-card-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.stop-title { font-weight: 600; text-decoration: none; color: var(--text); }
+.stop-title:hover { color: var(--accent); text-decoration: underline; }
+.stop-row-times { font-size: 12px; margin-top: 2px; }
+.eta-live { color: var(--success); font-weight: 600; }
+.eta-late { color: var(--danger); font-weight: 600; }
+.ws-status { font-size: 12px; }
+.ws-connected .live-dot { background: var(--success); }
+.ws-connecting .live-dot, .ws-disconnected .live-dot { background: var(--warning); }
+.ws-error .live-dot { background: var(--danger); animation: none; }
+
+/* --- Dashboard: workflow steps --- */
+.steps { margin: 0; padding-left: 22px; display: grid; gap: var(--space-2); font-size: 13px; }
+.steps li.done::marker { color: var(--success); font-weight: 700; }
+.steps li.done strong { color: var(--success); }
+.rank {
+  display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center;
+  border-radius: 999px; background: var(--accent-bg); color: var(--accent);
+  font-size: 11px; font-weight: 700; margin-right: var(--space-2);
+}
+
+.pod-signature-preview {
+  max-width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface-alt); margin-top: var(--space-2);
+}
+
+/* --- Login extras --- */
+.demo-accounts { margin-top: var(--space-4); font-size: 12px; }
+.demo-account-list { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+
+/* --- Driver view (mobile first, usable at 360px) --- */
+.driver-shell { min-height: 100%; display: flex; flex-direction: column; background: var(--bg); }
+.driver-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-4); background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.driver-brand { font-weight: 700; font-size: 16px; }
+.driver-main { flex: 1; width: 100%; max-width: 520px; margin: 0 auto; padding: var(--space-4); display: grid; gap: var(--space-3); align-content: start; }
+.driver-main .card + .card { margin-top: 0; }
+.driver-route { display: grid; gap: var(--space-2); }
+.driver-route-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.progress { height: 8px; border-radius: 999px; background: var(--surface-alt); overflow: hidden; }
+.progress-bar { height: 100%; background: var(--success); transition: width 0.4s ease; }
+.switch-row { display: flex; gap: var(--space-2); align-items: flex-start; font-size: 13px; margin-top: var(--space-2); }
+.switch-row input { margin-top: 3px; }
+.gps-state { display: block; font-size: 12px; color: var(--text-muted); }
+.gps-ok { color: var(--success); }
+.gps-denied, .gps-error, .gps-unsupported { color: var(--danger); }
+.next-stop { display: grid; gap: var(--space-2); border-color: var(--accent); }
+.next-stop-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; }
+.next-stop-title { font-size: 18px; font-weight: 700; }
+.next-stop-address { font-size: 15px; }
+.driver-actions { display: grid; gap: var(--space-2); }
+.driver-big-btn { width: 100%; padding: 13px 14px; font-size: 15px; }
+.driver-stop { padding: var(--space-2) 0; border-bottom: 1px dashed var(--border); font-size: 13px; }
+.driver-stop:last-child { border-bottom: none; }
+
+/* --- Responsive --- */
+.navbar { overflow-x: auto; }
+@media (max-width: 900px) {
+  .orders-top.with-form { grid-template-columns: 1fr; }
+  .orders-top.with-form .map-card { position: static; height: 340px; }
+  .map-layout { grid-template-columns: 1fr; height: auto; }
+  .map-sidebar { max-height: 45vh; }
+  .map-canvas-card { height: 60vh; }
+  .page { padding: var(--space-4); }
+}
+@media (max-width: 480px) {
+  .chart-grid { grid-template-columns: 1fr; }
+  .page-header h1 { font-size: 18px; }
+}

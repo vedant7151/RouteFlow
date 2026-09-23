@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/routeflow_test
+
+routeflow:
+  simulator:
+    enabled: false
+  seed:
+    enabled: false

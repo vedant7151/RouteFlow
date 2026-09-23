@@ -1,0 +1,9 @@
+# Root-level env file for docker-compose.yml (see .env.docker.example) - may hold JWT_SECRET etc.
+.env
+
+.DS_Store
+
+# Ignore project documentation files
+PRD_1_RouteFlow_Delivery_Tracking_and_Route_Optimization.md
+DEPLOY_AWS.md
+PROJECT_EXPLAINER.txt

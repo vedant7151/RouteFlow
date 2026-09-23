@@ -1,0 +1,80 @@
+# One-command local run of the whole stack: MongoDB + backend API + frontend.
+#
+# BEFORE RUNNING: check the ports below are free on your machine (see README.md "Docker" section
+# for the exact netstat/lsof commands) - 27017, 8080 and 8081 by default. Override any of them with
+# a .env file next to this one (copy .env.docker.example) if they collide with something else.
+#
+#   docker compose up --build
+#
+# Frontend:  http://localhost:8081
+# Backend:   http://localhost:8080  (Swagger at /swagger-ui.html)
+# Mongo:     localhost:27018 (only needed on the host if you want to inspect it with Compass/mongosh)
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: routeflow-mongo
+    restart: unless-stopped
+    ports:
+      # Default host port is 27018, not 27017 - many machines (including this one) already run
+      # a local MongoDB service on 27017. The app itself never uses this mapping (backend talks to
+      # "mongodb:27017" over the internal Docker network); it is only here so you can inspect the
+      # containerized DB with Compass/mongosh from the host if you want to.
+      - "${MONGO_PORT:-27018}:27017"
+    volumes:
+      - routeflow-mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: routeflow-backend
+    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/routeflow
+      JWT_SECRET: ${JWT_SECRET:-change-this-dev-only-secret-key-must-be-at-least-32-bytes-long}
+      APP_TIME_ZONE: ${APP_TIME_ZONE:-Asia/Kolkata}
+      OSRM_BASE_URL: ${OSRM_BASE_URL:-https://router.project-osrm.org}
+      NOMINATIM_BASE_URL: ${NOMINATIM_BASE_URL:-https://nominatim.openstreetmap.org}
+      # The browser calls the backend directly (not through the frontend container), so this must
+      # be the frontend's host-published origin, not its in-network service address.
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:8081,http://localhost:5173}
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-true}
+      DRIVER_SIMULATOR_ENABLED: ${DRIVER_SIMULATOR_ENABLED:-true}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    volumes:
+      - routeflow-uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Baked into the JS bundle at build time - must match wherever you publish the backend port
+        # below (BACKEND_PORT), since the browser calls it directly from the host.
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8080}
+    container_name: routeflow-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-8081}:80"
+
+volumes:
+  routeflow-mongo-data:
+  routeflow-uploads:
